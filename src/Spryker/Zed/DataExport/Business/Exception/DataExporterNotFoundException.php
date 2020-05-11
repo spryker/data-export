@@ -5,10 +5,10 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Service\DataExport;
+namespace Spryker\Zed\DataExport\Business\Exception;
 
-use Spryker\Service\Kernel\AbstractServiceFactory;
+use Exception;
 
-class DataExportFactory extends AbstractServiceFactory
+class DataExporterNotFoundException extends Exception
 {
 }

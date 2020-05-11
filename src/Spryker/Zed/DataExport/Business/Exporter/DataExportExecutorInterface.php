@@ -5,22 +5,17 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\DataExport\Business;
+namespace Spryker\Zed\DataExport\Business\Exporter;
 
 use Generated\Shared\Transfer\DataExportConfigurationsTransfer;
 use Generated\Shared\Transfer\DataExportReportTransfer;
 
-interface DataExportFacadeInterface
+interface DataExportExecutorInterface
 {
     /**
-     * Specification:
-     * - Todo
-     *
      * @param \Generated\Shared\Transfer\DataExportConfigurationsTransfer $dataExportConfigurationsTransfer
      *
      * @return \Generated\Shared\Transfer\DataExportReportTransfer[]
-     *@api
-     *
      */
     public function exportDataEntities(DataExportConfigurationsTransfer $dataExportConfigurationsTransfer): array;
 }
