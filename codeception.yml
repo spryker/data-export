@@ -1,6 +1,7 @@
 namespace: DataExport
 include:
     - tests/SprykerTest/Service/DataExport
+    - tests/SprykerTest/Zed/DataExport
 paths:
     tests: tests
     output: tests/_output
