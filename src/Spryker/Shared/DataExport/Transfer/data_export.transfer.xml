@@ -30,6 +30,7 @@
         <property name="filterCriteria" type="array" singular="filterCriterion" associative="true"/>
         <property name="connection" type="DataExportConnectionConfiguration"/>
         <property name="hooks" type="array" singular="hook" associative="true"/>
+        <property name="batchSize" type="int"/>
     </transfer>
 
     <transfer name="DataExportFormatConfiguration">
@@ -44,6 +45,7 @@
     <transfer name="DataExportBatch">
         <property name="data" type="array" singular="dataItem"/>
         <property name="offset" type="int"/>
+        <property name="limit" type="int"/>
         <property name="fields" type="string[]" singular="field"/>
     </transfer>
 

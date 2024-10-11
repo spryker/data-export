@@ -14,9 +14,13 @@ use Generated\Shared\Transfer\DataExportReportTransfer;
 use Generator;
 use Spryker\Service\DataExport\DataExportServiceInterface;
 use Spryker\Shared\Log\LoggerTrait;
-use Spryker\Zed\DataExport\Business\Exception\DataExporterNotFoundException;
+use Spryker\Zed\DataExport\Business\DataEntityPluginProvider\DataExportPluginProviderInterface;
 use Spryker\Zed\DataExport\DataExportConfig;
 use Spryker\Zed\DataExport\Dependency\Facade\DataExportToGracefulRunnerFacadeInterface;
+use Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityExporterPluginInterface;
+use Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityFieldsConfigPluginInterface;
+use Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityGeneratorPluginInterface;
+use Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityReaderPluginInterface;
 use Throwable;
 
 class DataExportExecutor
@@ -34,9 +38,9 @@ class DataExportExecutor
     protected const HOOK_KEY_DATA_ENTITY = 'data_entity';
 
     /**
-     * @var array<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityExporterPluginInterface>
+     * @var int
      */
-    protected $dataEntityExporterPlugins = [];
+    protected const DEFAULT_BATCH_SIZE = 1000;
 
     /**
      * @var \Spryker\Service\DataExport\DataExportServiceInterface
@@ -54,24 +58,34 @@ class DataExportExecutor
     protected $gracefulRunnerFacade;
 
     /**
-     * @param array<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityExporterPluginInterface> $dataEntityExporterPlugins
+     * @var \Spryker\Zed\DataExport\Business\Exporter\DataExportGeneratorExporterInterface
+     */
+    protected $dataExportGeneratorExporter;
+
+    /**
+     * @var \Spryker\Zed\DataExport\Business\DataEntityPluginProvider\DataExportPluginProviderInterface
+     */
+    protected $dataExportPluginProvider;
+
+    /**
+     * @param \Spryker\Zed\DataExport\Business\DataEntityPluginProvider\DataExportPluginProviderInterface $dataExportPluginProvider
      * @param \Spryker\Service\DataExport\DataExportServiceInterface $dataExportService
      * @param \Spryker\Zed\DataExport\DataExportConfig $dataExportConfig
      * @param \Spryker\Zed\DataExport\Dependency\Facade\DataExportToGracefulRunnerFacadeInterface $gracefulRunnerFacade
+     * @param \Spryker\Zed\DataExport\Business\Exporter\DataExportGeneratorExporterInterface $dataExportGeneratorExporter
      */
     public function __construct(
-        array $dataEntityExporterPlugins,
+        DataExportPluginProviderInterface $dataExportPluginProvider,
         DataExportServiceInterface $dataExportService,
         DataExportConfig $dataExportConfig,
-        DataExportToGracefulRunnerFacadeInterface $gracefulRunnerFacade
+        DataExportToGracefulRunnerFacadeInterface $gracefulRunnerFacade,
+        DataExportGeneratorExporterInterface $dataExportGeneratorExporter
     ) {
         $this->dataExportService = $dataExportService;
         $this->dataExportConfig = $dataExportConfig;
         $this->gracefulRunnerFacade = $gracefulRunnerFacade;
-
-        foreach ($dataEntityExporterPlugins as $dataEntityExporterPlugin) {
-            $this->dataEntityExporterPlugins[$dataEntityExporterPlugin::getDataEntity()] = $dataEntityExporterPlugin;
-        }
+        $this->dataExportGeneratorExporter = $dataExportGeneratorExporter;
+        $this->dataExportPluginProvider = $dataExportPluginProvider;
     }
 
     /**
@@ -147,21 +161,24 @@ class DataExportExecutor
     /**
      * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
      *
-     * @throws \Spryker\Zed\DataExport\Business\Exception\DataExporterNotFoundException
-     *
      * @return \Generated\Shared\Transfer\DataExportReportTransfer
      */
     protected function runExport(DataExportConfigurationTransfer $dataExportConfigurationTransfer): DataExportReportTransfer
     {
         $dataEntity = $dataExportConfigurationTransfer->getDataEntity();
-        if (isset($this->dataEntityExporterPlugins[$dataEntity])) {
-            return $this->dataEntityExporterPlugins[$dataEntity]->export($dataExportConfigurationTransfer);
+        $this->dataExportPluginProvider->requireDataEntityPlugin($dataEntity);
+        $this->expandConfigurationWithPlugins($dataExportConfigurationTransfer);
+
+        if ($this->dataExportPluginProvider->exists($dataEntity, DataEntityExporterPluginInterface::class::class)) {
+            return $this->dataExportPluginProvider
+                ->get($dataEntity, DataEntityExporterPluginInterface::class)
+                ->export($dataExportConfigurationTransfer);
         }
 
-        throw new DataExporterNotFoundException(sprintf(
-            'Data exporter not found for %s data entity',
-            $dataExportConfigurationTransfer->getDataEntity(),
-        ));
+        $dataExportGenerator = $this->getBatchGenerator($dataExportConfigurationTransfer);
+
+        return $this->dataExportGeneratorExporter
+            ->exportFromGenerator($dataExportGenerator, $dataExportConfigurationTransfer);
     }
 
     /**
@@ -178,5 +195,62 @@ class DataExportExecutor
         );
 
         return $dataExportConfigurationTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
+     *
+     * @return \Generator<\Generated\Shared\Transfer\DataExportBatchTransfer>
+     */
+    protected function getBatchGenerator(DataExportConfigurationTransfer $dataExportConfigurationTransfer): Generator
+    {
+        $dataEntity = $dataExportConfigurationTransfer->getDataEntity();
+        if ($this->dataExportPluginProvider->exists($dataEntity, DataEntityGeneratorPluginInterface::class)) {
+            return $this->dataExportPluginProvider
+                ->get($dataEntity, DataEntityGeneratorPluginInterface::class)
+                ->getBatchGenerator($dataExportConfigurationTransfer);
+        }
+
+        $offset = 0;
+        $limit = $dataExportConfigurationTransfer->getBatchSize() ?: static::DEFAULT_BATCH_SIZE;
+        $plugin = $this->dataExportPluginProvider->get($dataEntity, DataEntityReaderPluginInterface::class);
+
+        do {
+            $dataExportBatchTransfer = $plugin->getDataBatch($dataExportConfigurationTransfer, $offset, $limit);
+            $dataExportBatchTransfer->setOffset($offset)->setLimit($limit);
+
+            yield $dataExportBatchTransfer;
+
+            $offset += count($dataExportBatchTransfer->getData());
+        } while (count($dataExportBatchTransfer->getData()) === $limit);
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
+     *
+     * @return void
+     */
+    protected function expandConfigurationWithPlugins(DataExportConfigurationTransfer $dataExportConfigurationTransfer): void
+    {
+        $dataEntity = $dataExportConfigurationTransfer->getDataEntity();
+        $plugin = $this->dataExportPluginProvider->getDataEntityPlugin($dataEntity);
+
+        if (!($plugin instanceof DataEntityFieldsConfigPluginInterface)) {
+            return;
+        }
+
+        $fields = [];
+        foreach (array_merge($plugin->getFieldsConfig(), $dataExportConfigurationTransfer->getFields()) as $key => $field) {
+            if (!is_int($key) && !str_contains(':', $field)) {
+                $fields[$key] = $key . ':' . $field;
+
+                continue;
+            }
+
+            $exploded = explode(':', $field, 1);
+            $fields[$exploded[0]] = $field;
+        }
+
+        $dataExportConfigurationTransfer->setFields(array_values($fields));
     }
 }
