@@ -169,7 +169,7 @@ class DataExportExecutor
         $this->dataExportPluginProvider->requireDataEntityPlugin($dataEntity);
         $this->expandConfigurationWithPlugins($dataExportConfigurationTransfer);
 
-        if ($this->dataExportPluginProvider->exists($dataEntity, DataEntityExporterPluginInterface::class::class)) {
+        if ($this->dataExportPluginProvider->exists($dataEntity, DataEntityExporterPluginInterface::class)) {
             return $this->dataExportPluginProvider
                 ->get($dataEntity, DataEntityExporterPluginInterface::class)
                 ->export($dataExportConfigurationTransfer);
