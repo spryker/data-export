@@ -43,7 +43,7 @@ class DataExportMapper implements DataExportMapperInterface
         $result = [];
 
         foreach ($fields as $pathKey) {
-            $explodedKey = explode(':', $pathKey, 2);
+            $explodedKey = explode(':', $pathKey);
             $exportKey = $explodedKey[0];
             $pathKey = $explodedKey[1] ?? $explodedKey[0];
 

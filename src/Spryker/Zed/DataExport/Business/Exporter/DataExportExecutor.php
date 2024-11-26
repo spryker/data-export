@@ -247,7 +247,7 @@ class DataExportExecutor
                 continue;
             }
 
-            $exploded = explode(':', $field, 1);
+            $exploded = explode(':', $field);
             $fields[$exploded[0]] = $field;
         }
 
