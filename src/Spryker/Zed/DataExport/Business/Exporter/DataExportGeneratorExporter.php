@@ -58,6 +58,7 @@ class DataExportGeneratorExporter implements DataExportGeneratorExporterInterfac
             ->setIsSuccessful(false);
 
         foreach ($dataExportGenerator as $dataExportBatchTransfer) {
+            /** @phpstan-ignore instanceof.alwaysTrue */
             if (!$dataExportBatchTransfer instanceof DataExportBatchTransfer) {
                 throw new TransferTypeMismatchException(
                     sprintf(

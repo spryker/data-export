@@ -75,7 +75,7 @@ class DataExportBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return array<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityExporterPluginInterface>
+     * @return list<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityExporterPluginInterface>
      */
     public function getDataEntityExporterPlugins(): array
     {
@@ -91,7 +91,7 @@ class DataExportBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return array<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityReaderPluginInterface>
+     * @return list<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityReaderPluginInterface>
      */
     public function getDataEntityReaderPlugins(): array
     {
@@ -99,7 +99,7 @@ class DataExportBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return array<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityGeneratorPluginInterface>
+     * @return list<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityGeneratorPluginInterface>
      */
     public function getDataEntityGeneratorPlugins(): array
     {

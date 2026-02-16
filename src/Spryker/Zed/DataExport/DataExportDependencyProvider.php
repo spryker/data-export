@@ -101,7 +101,7 @@ class DataExportDependencyProvider extends AbstractBundleDependencyProvider
     }
 
     /**
-     * @return array<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityExporterPluginInterface>
+     * @return list<\Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityExporterPluginInterface>
      */
     protected function getDataEntityExporterPlugins(): array
     {
