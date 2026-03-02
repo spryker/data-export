@@ -11,12 +11,6 @@ use Generated\Shared\Transfer\DataExportConfigurationTransfer;
 
 interface DataExportConfigurationMergerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer|null $primaryDataExportConfigurationTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer|null $secondaryDataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportConfigurationTransfer
-     */
     public function mergeDataExportConfigurationTransfers(
         ?DataExportConfigurationTransfer $primaryDataExportConfigurationTransfer,
         ?DataExportConfigurationTransfer $secondaryDataExportConfigurationTransfer

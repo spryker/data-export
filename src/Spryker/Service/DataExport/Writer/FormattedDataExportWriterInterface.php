@@ -14,13 +14,6 @@ use Generated\Shared\Transfer\DataExportWriteResponseTransfer;
 
 interface FormattedDataExportWriterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DataExportFormatResponseTransfer $dataExportFormatResponseTransfer
-     * @param \Generated\Shared\Transfer\DataExportBatchTransfer $dataExportBatchTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportWriteResponseTransfer
-     */
     public function write(
         DataExportFormatResponseTransfer $dataExportFormatResponseTransfer,
         DataExportBatchTransfer $dataExportBatchTransfer,

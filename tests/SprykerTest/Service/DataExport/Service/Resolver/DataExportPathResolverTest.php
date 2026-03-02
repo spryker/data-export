@@ -64,9 +64,6 @@ class DataExportPathResolverTest extends Unit
      */
     protected const HOOK_KEY_EXTENSION = 'extension';
 
-    /**
-     * @return void
-     */
     public function testResolvePathWillResolvePathWithPlaceholders(): void
     {
         //Arrange

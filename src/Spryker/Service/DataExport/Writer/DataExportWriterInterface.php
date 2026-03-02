@@ -13,12 +13,6 @@ use Generated\Shared\Transfer\DataExportWriteResponseTransfer;
 
 interface DataExportWriterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DataExportBatchTransfer $dataExportBatchTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportWriteResponseTransfer
-     */
     public function write(
         DataExportBatchTransfer $dataExportBatchTransfer,
         DataExportConfigurationTransfer $dataExportConfigurationTransfer

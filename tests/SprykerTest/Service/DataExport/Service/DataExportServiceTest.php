@@ -70,9 +70,6 @@ class DataExportServiceTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testParseConfigurationWillParseConfigurationYmlFile(): void
     {
         //Arrange
@@ -87,9 +84,6 @@ class DataExportServiceTest extends Unit
         $this->tester->assertNotNull($dataExportConfigurationsTransfer->getActions());
     }
 
-    /**
-     * @return void
-     */
     public function testMergeDataExportConfigurationsWillMergeConfigurationCorrectly(): void
     {
         //Arrange
@@ -108,9 +102,6 @@ class DataExportServiceTest extends Unit
         $this->assertSame(static::DATA_ENTITY_PRIMARY, $dataExportConfigurationTransfer->getDataEntity());
     }
 
-    /**
-     * @return void
-     */
     public function testMergeDataExportConfigurationsWillMergeHooks(): void
     {
         //Arrange
@@ -131,9 +122,6 @@ class DataExportServiceTest extends Unit
         $this->assertArrayHasKey(static::HOOK_KEY_EXTENSION, $hooks);
     }
 
-    /**
-     * @return void
-     */
     public function testWriteWillCreateNewCsvFile(): void
     {
         //Arrange
@@ -180,9 +168,6 @@ class DataExportServiceTest extends Unit
         $this->tester->removeCreatedFiles(static::DESTINATION_DIR);
     }
 
-    /**
-     * @return void
-     */
     public function testGetFormatExtensionWillReturnExtensionCsv(): void
     {
         //Arrange
@@ -197,9 +182,6 @@ class DataExportServiceTest extends Unit
         $this->assertSame('csv', $extension, 'Expected extension is "csv"');
     }
 
-    /**
-     * @return void
-     */
     public function testResolveDataExportActionConfigurationWillResolveConfigurations(): void
     {
         //Arrange

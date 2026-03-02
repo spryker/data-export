@@ -55,12 +55,6 @@ class DataExportWriter implements DataExportWriterInterface
         $this->dataExportLocalWriter = $dataExportLocalWriter;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportBatchTransfer $dataExportBatchTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportWriteResponseTransfer
-     */
     public function write(
         DataExportBatchTransfer $dataExportBatchTransfer,
         DataExportConfigurationTransfer $dataExportConfigurationTransfer
@@ -97,11 +91,6 @@ class DataExportWriter implements DataExportWriterInterface
         return $dataExportWriteResponseTransfer->addMessage($this->createConnectionPluginNotFoundMessage($connectionType));
     }
 
-    /**
-     * @param string $connectionType
-     *
-     * @return \Generated\Shared\Transfer\MessageTransfer
-     */
     protected function createConnectionPluginNotFoundMessage(string $connectionType): MessageTransfer
     {
         return (new MessageTransfer())->setValue(

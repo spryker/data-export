@@ -18,20 +18,11 @@ class DataExportConfigurationResolver implements DataExportConfigurationResolver
      */
     protected $dataExportConfigurationMerger;
 
-    /**
-     * @param \Spryker\Service\DataExport\Merger\DataExportConfigurationMergerInterface $dataExportConfigurationMerger
-     */
     public function __construct(DataExportConfigurationMergerInterface $dataExportConfigurationMerger)
     {
         $this->dataExportConfigurationMerger = $dataExportConfigurationMerger;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportActionConfigurationTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationsTransfer $additionalDataExportConfigurationsTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportConfigurationTransfer
-     */
     public function resolveDataExportActionConfiguration(
         DataExportConfigurationTransfer $dataExportActionConfigurationTransfer,
         DataExportConfigurationsTransfer $additionalDataExportConfigurationsTransfer
@@ -56,12 +47,6 @@ class DataExportConfigurationResolver implements DataExportConfigurationResolver
         );
     }
 
-    /**
-     * @param string $dataEntityName
-     * @param \Generated\Shared\Transfer\DataExportConfigurationsTransfer $dataExportConfigurationsTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportConfigurationTransfer|null
-     */
     protected function findDataExportActionConfigurationByDataEntity(
         string $dataEntityName,
         DataExportConfigurationsTransfer $dataExportConfigurationsTransfer

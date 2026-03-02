@@ -28,10 +28,6 @@ class DataExportGeneratorExporter implements DataExportGeneratorExporterInterfac
      */
     protected DataExportMapperInterface $dataExportMapper;
 
-    /**
-     * @param \Spryker\Service\DataExport\DataExportServiceInterface $dataExportService
-     * @param \Spryker\Zed\DataExport\Business\Mapper\DataExportMapperInterface $dataExportMapper
-     */
     public function __construct(
         DataExportServiceInterface $dataExportService,
         DataExportMapperInterface $dataExportMapper
@@ -89,12 +85,6 @@ class DataExportGeneratorExporter implements DataExportGeneratorExporterInterfac
         return $this->createDataExportReportTransfer(true, $dataExportResultTransfer);
     }
 
-    /**
-     * @param bool $isSuccessful
-     * @param \Generated\Shared\Transfer\DataExportResultTransfer $dataExportResultTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportReportTransfer
-     */
     protected function createDataExportReportTransfer(bool $isSuccessful, DataExportResultTransfer $dataExportResultTransfer): DataExportReportTransfer
     {
         return (new DataExportReportTransfer())

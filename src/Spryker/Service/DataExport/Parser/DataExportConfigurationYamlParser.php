@@ -34,10 +34,6 @@ class DataExportConfigurationYamlParser implements DataExportConfigurationParser
      */
     protected $dataExportConfigurationMapper;
 
-    /**
-     * @param \Spryker\Service\DataExport\Dependency\Service\DataExportToUtilDataReaderServiceInterface $utilDataReaderService
-     * @param \Spryker\Service\DataExport\Mapper\DataExportConfigurationMapperInterface $dataExportConfigurationMapper
-     */
     public function __construct(
         DataExportToUtilDataReaderServiceInterface $utilDataReaderService,
         DataExportConfigurationMapperInterface $dataExportConfigurationMapper
@@ -46,11 +42,6 @@ class DataExportConfigurationYamlParser implements DataExportConfigurationParser
         $this->dataExportConfigurationMapper = $dataExportConfigurationMapper;
     }
 
-    /**
-     * @param string $fileName
-     *
-     * @return \Generated\Shared\Transfer\DataExportConfigurationsTransfer
-     */
     public function parseConfigurationFile(string $fileName): DataExportConfigurationsTransfer
     {
         $yamlBatchIterator = $this->utilDataReaderService->getYamlBatchIterator($fileName);
@@ -65,11 +56,6 @@ class DataExportConfigurationYamlParser implements DataExportConfigurationParser
         return $this->addDataExportConfigurationHooks($dataExportConfigurationsTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationsTransfer $dataExportConfigurationsTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportConfigurationsTransfer
-     */
     protected function addDataExportConfigurationHooks(DataExportConfigurationsTransfer $dataExportConfigurationsTransfer): DataExportConfigurationsTransfer
     {
         $defaultDataExportConfigurationTransfer = $dataExportConfigurationsTransfer->getDefaults();

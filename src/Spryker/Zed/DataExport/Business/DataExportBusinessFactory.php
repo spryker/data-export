@@ -24,9 +24,6 @@ use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
  */
 class DataExportBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\DataExport\Business\Exporter\DataExportExecutor
-     */
     public function createDataExportHandler(): DataExportExecutor
     {
         return new DataExportExecutor(
@@ -38,9 +35,6 @@ class DataExportBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataExport\Business\DataEntityPluginProvider\DataExportPluginProviderInterface
-     */
     public function createDataExportPluginProvider(): DataExportPluginProviderInterface
     {
         return new DataExportPluginProvider(
@@ -50,25 +44,16 @@ class DataExportBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\DataExport\Business\Exporter\DataExportGeneratorExporterInterface
-     */
     public function createDataExportGeneratorExporter(): DataExportGeneratorExporterInterface
     {
         return new DataExportGeneratorExporter($this->getDataExportService(), $this->createDataExportMapper());
     }
 
-    /**
-     * @return \Spryker\Zed\DataExport\Business\Mapper\DataExportMapperInterface
-     */
     public function createDataExportMapper(): DataExportMapperInterface
     {
         return new DataExportMapper();
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\DataExportServiceInterface
-     */
     public function getDataExportService(): DataExportServiceInterface
     {
         return $this->getProvidedDependency(DataExportDependencyProvider::SERVICE_DATA_EXPORT);
@@ -82,9 +67,6 @@ class DataExportBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(DataExportDependencyProvider::DATA_ENTITY_EXPORTER_PLUGINS);
     }
 
-    /**
-     * @return \Spryker\Zed\DataExport\Dependency\Facade\DataExportToGracefulRunnerFacadeInterface
-     */
     public function getGracefulRunnerFacade(): DataExportToGracefulRunnerFacadeInterface
     {
         return $this->getProvidedDependency(DataExportDependencyProvider::FACADE_GRACEFUL_RUNNER);

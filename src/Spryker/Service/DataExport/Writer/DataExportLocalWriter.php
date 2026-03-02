@@ -47,11 +47,6 @@ class DataExportLocalWriter implements DataExportWriterInterface
      */
     protected $dataExportConfig;
 
-    /**
-     * @param \Spryker\Service\DataExport\Formatter\DataExportFormatterInterface $dataExportFormatter
-     * @param \Spryker\Service\DataExport\Resolver\DataExportPathResolverInterface $dataExportPathResolver
-     * @param \Spryker\Service\DataExport\DataExportConfig $dataExportConfig
-     */
     public function __construct(
         DataExportFormatterInterface $dataExportFormatter,
         DataExportPathResolverInterface $dataExportPathResolver,
@@ -62,12 +57,6 @@ class DataExportLocalWriter implements DataExportWriterInterface
         $this->dataExportConfig = $dataExportConfig;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportBatchTransfer $dataExportBatchTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportWriteResponseTransfer
-     */
     public function write(
         DataExportBatchTransfer $dataExportBatchTransfer,
         DataExportConfigurationTransfer $dataExportConfigurationTransfer
@@ -114,11 +103,6 @@ class DataExportLocalWriter implements DataExportWriterInterface
             ->setFileName(basename($filePath));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportWriteResponseTransfer
-     */
     protected function isValidConfiguration(DataExportConfigurationTransfer $dataExportConfigurationTransfer): DataExportWriteResponseTransfer
     {
         $result = (new DataExportWriteResponseTransfer())
@@ -134,12 +118,6 @@ class DataExportLocalWriter implements DataExportWriterInterface
             ->addMessage($this->createConfigurationErrorMessage($dataExportConfigurationTransfer));
     }
 
-    /**
-     * @param string $filePath
-     * @param int $permission
-     *
-     * @return bool
-     */
     protected function createDirectory(string $filePath, int $permission = 0777): bool
     {
         $dirName = dirname($filePath);
@@ -147,11 +125,6 @@ class DataExportLocalWriter implements DataExportWriterInterface
         return is_dir($dirName) || mkdir($dirName, $permission, true) || is_dir($dirName);
     }
 
-    /**
-     * @param string|null $filePath
-     *
-     * @return \Generated\Shared\Transfer\MessageTransfer
-     */
     protected function createWriteFailErrorMessage(?string $filePath): MessageTransfer
     {
         return (new MessageTransfer())
@@ -160,11 +133,6 @@ class DataExportLocalWriter implements DataExportWriterInterface
             );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\MessageTransfer
-     */
     protected function createConfigurationErrorMessage(DataExportConfigurationTransfer $dataExportConfigurationTransfer): MessageTransfer
     {
         return (new MessageTransfer())

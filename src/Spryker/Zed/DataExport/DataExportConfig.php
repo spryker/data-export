@@ -44,9 +44,6 @@ class DataExportConfig extends AbstractBundleConfig
         );
     }
 
-    /**
-     * @return string
-     */
     protected function getModuleExportConfigurationPath(): string
     {
         $moduleRoot = realpath(

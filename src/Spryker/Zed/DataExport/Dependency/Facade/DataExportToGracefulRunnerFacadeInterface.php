@@ -11,11 +11,5 @@ use Generator;
 
 interface DataExportToGracefulRunnerFacadeInterface
 {
-    /**
-     * @param \Generator $generator
-     * @param string|null $throwableClassName
-     *
-     * @return int
-     */
     public function run(Generator $generator, ?string $throwableClassName = null): int;
 }

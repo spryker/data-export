@@ -29,30 +29,17 @@ class DataExportServiceTester extends Actor
 {
     use _generated\DataExportServiceTesterActions;
 
-    /**
-     * @return \Spryker\Service\DataExport\DataExportServiceInterface
-     */
     public function getService(): DataExportServiceInterface
     {
         return $this->getLocator()->dataExport()->service();
     }
 
-    /**
-     * @param string $directoryName
-     *
-     * @return void
-     */
     public function removeCreatedFiles(string $directoryName): void
     {
         $targetDirectory = Configuration::outputDir() . $directoryName;
         exec('rm -rf ' . $targetDirectory);
     }
 
-    /**
-     * @param string $filePath
-     *
-     * @return array
-     */
     public function getCsvFileData(string $filePath): array
     {
         $file = fopen($filePath, 'rb');

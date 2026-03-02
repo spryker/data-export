@@ -44,12 +44,6 @@ class DataExportFormatter implements DataExportFormatterInterface
         $this->dataExportCsvFormatter = $dataExportCsvFormatter;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportBatchTransfer $dataExportBatchTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportFormatResponseTransfer
-     */
     public function formatBatch(
         DataExportBatchTransfer $dataExportBatchTransfer,
         DataExportConfigurationTransfer $dataExportConfigurationTransfer
@@ -71,11 +65,6 @@ class DataExportFormatter implements DataExportFormatterInterface
         return $this->createFormatterNotFoundResponse($dataExportConfigurationTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return string|null
-     */
     public function getFormatExtension(DataExportConfigurationTransfer $dataExportConfigurationTransfer): ?string
     {
         foreach ($this->dataExportFormatterPlugins as $dataExportFormatterPlugin) {
@@ -93,11 +82,6 @@ class DataExportFormatter implements DataExportFormatterInterface
         return null;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportFormatResponseTransfer
-     */
     protected function createFormatterNotFoundResponse(DataExportConfigurationTransfer $dataExportConfigurationTransfer): DataExportFormatResponseTransfer
     {
         $messageTransfer = (new MessageTransfer())->setValue(

@@ -78,9 +78,6 @@ class OutputStreamDataExportConnectionPluginTest extends Unit
         $this->assertSame($expectedResult, $isApplicable);
     }
 
-    /**
-     * @return void
-     */
     public function testWriteWritesDataToProvidedOutputStream(): void
     {
         // Arrange
@@ -109,9 +106,6 @@ class OutputStreamDataExportConnectionPluginTest extends Unit
         $this->assertSame(static::TEST_DATA_FORMATTED, $output);
     }
 
-    /**
-     * @return void
-     */
     public function testWriteReturnsErrorWhenProvidedDestinationIsNotWritableStream(): void
     {
         // Arrange

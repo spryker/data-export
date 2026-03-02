@@ -51,11 +51,6 @@ class DataExportBusinessTester extends Actor
         );
     }
 
-    /**
-     * @param array $fields
-     *
-     * @return \Generated\Shared\Transfer\DataExportConfigurationsTransfer
-     */
     public function getDataExportConfigurationsTransferWithFields(array $fields): DataExportConfigurationsTransfer
     {
         return (new DataExportConfigurationsTransfer())

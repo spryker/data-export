@@ -73,13 +73,6 @@ class DataExportExecutor
      */
     protected $dataExportPluginProvider;
 
-    /**
-     * @param \Spryker\Zed\DataExport\Business\DataEntityPluginProvider\DataExportPluginProviderInterface $dataExportPluginProvider
-     * @param \Spryker\Service\DataExport\DataExportServiceInterface $dataExportService
-     * @param \Spryker\Zed\DataExport\DataExportConfig $dataExportConfig
-     * @param \Spryker\Zed\DataExport\Dependency\Facade\DataExportToGracefulRunnerFacadeInterface $gracefulRunnerFacade
-     * @param \Spryker\Zed\DataExport\Business\Exporter\DataExportGeneratorExporterInterface $dataExportGeneratorExporter
-     */
     public function __construct(
         DataExportPluginProviderInterface $dataExportPluginProvider,
         DataExportServiceInterface $dataExportService,
@@ -154,9 +147,6 @@ class DataExportExecutor
         return $dataExportResultTransfers;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DataExportConfigurationsTransfer
-     */
     protected function getDataExportDefaultsConfiguration(): DataExportConfigurationsTransfer
     {
         return $this->dataExportService->parseConfiguration(
@@ -193,11 +183,6 @@ class DataExportExecutor
             ->exportFromGenerator($this->getBatchGenerator($dataExportConfigurationTransfer), $dataExportConfigurationTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportConfigurationTransfer
-     */
     protected function addDataExportConfigurationActionHooks(DataExportConfigurationTransfer $dataExportConfigurationTransfer): DataExportConfigurationTransfer
     {
         $dataExportConfigurationTransfer->addHook(static::HOOK_KEY_DATA_ENTITY, $dataExportConfigurationTransfer->getDataEntity());

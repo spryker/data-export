@@ -35,12 +35,6 @@ class DataExportPluginProvider implements DataExportPluginProviderInterface
         $this->addDataEntityPluginsPerEntityAndInterface($dataExportDataEntityReaderPlugins, DataEntityReaderPluginInterface::class);
     }
 
-    /**
-     * @param string $dataEntityName
-     * @param string|null $pluginInterface
-     *
-     * @return bool
-     */
     public function hasDataEntityPlugin(string $dataEntityName, ?string $pluginInterface = null): bool
     {
         return $dataEntityName &&
@@ -77,11 +71,6 @@ class DataExportPluginProvider implements DataExportPluginProviderInterface
         return $this->dataEntityPlugins[$dataEntityName][$pluginInterface];
     }
 
-    /**
-     * @param string $dataEntityName
-     *
-     * @return \Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityPluginInterface|false
-     */
     public function findDataEntityPlugin(string $dataEntityName): DataEntityPluginInterface|false
     {
         return reset($this->dataEntityPlugins[$dataEntityName]);

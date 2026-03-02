@@ -9,13 +9,6 @@ namespace Spryker\Shared\DataExport;
 
 interface DataExportPropertyReaderInterface
 {
-    /**
-     * @param array $data
-     * @param string $key
-     * @param mixed $default
-     *
-     * @return mixed
-     */
     public static function get(array $data, string $key, mixed $default = null): mixed;
 
     /**

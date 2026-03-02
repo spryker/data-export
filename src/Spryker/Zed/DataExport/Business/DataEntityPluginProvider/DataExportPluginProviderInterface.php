@@ -11,12 +11,6 @@ use Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityPluginInterface;
 
 interface DataExportPluginProviderInterface
 {
-    /**
-     * @param string $dataEntityName
-     * @param string|null $pluginInterface
-     *
-     * @return bool
-     */
     public function hasDataEntityPlugin(string $dataEntityName, ?string $pluginInterface = null): bool;
 
     /**
@@ -36,10 +30,5 @@ interface DataExportPluginProviderInterface
      */
     public function getDataEntityPluginForInterface(string $dataEntityName, string $pluginInterface): DataEntityPluginInterface;
 
-    /**
-     * @param string $dataEntityName
-     *
-     * @return \Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityPluginInterface|false
-     */
     public function findDataEntityPlugin(string $dataEntityName): DataEntityPluginInterface|false;
 }

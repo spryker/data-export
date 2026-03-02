@@ -13,21 +13,10 @@ use Generated\Shared\Transfer\DataExportFormatResponseTransfer;
 
 interface DataExportFormatterInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DataExportBatchTransfer $dataExportBatchTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportFormatResponseTransfer
-     */
     public function formatBatch(
         DataExportBatchTransfer $dataExportBatchTransfer,
         DataExportConfigurationTransfer $dataExportConfigurationTransfer
     ): DataExportFormatResponseTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return string|null
-     */
     public function getFormatExtension(DataExportConfigurationTransfer $dataExportConfigurationTransfer): ?string;
 }

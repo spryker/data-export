@@ -34,9 +34,6 @@ use Spryker\Service\Kernel\AbstractServiceFactory;
  */
 class DataExportServiceFactory extends AbstractServiceFactory
 {
-    /**
-     * @return \Spryker\Service\DataExport\Parser\DataExportConfigurationParserInterface
-     */
     public function createDataExportConfigurationYamlParser(): DataExportConfigurationParserInterface
     {
         return new DataExportConfigurationYamlParser(
@@ -45,33 +42,21 @@ class DataExportServiceFactory extends AbstractServiceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Mapper\DataExportConfigurationMapperInterface
-     */
     public function createDataExportConfigurationMapper(): DataExportConfigurationMapperInterface
     {
         return new DataExportConfigurationMapper();
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Resolver\DataExportConfigurationResolverInterface
-     */
     public function createDataExportConfigurationResolver(): DataExportConfigurationResolverInterface
     {
         return new DataExportConfigurationResolver($this->createDataExportConfigurationMerger());
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Merger\DataExportConfigurationMergerInterface
-     */
     public function createDataExportConfigurationMerger(): DataExportConfigurationMergerInterface
     {
         return new DataExportConfigurationMerger();
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Writer\DataExportWriterInterface
-     */
     public function createDataExportWriter(): DataExportWriterInterface
     {
         return new DataExportWriter(
@@ -81,9 +66,6 @@ class DataExportServiceFactory extends AbstractServiceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Formatter\DataExportFormatterInterface
-     */
     public function createDataExportFormatter(): DataExportFormatterInterface
     {
         return new DataExportFormatter(
@@ -92,25 +74,16 @@ class DataExportServiceFactory extends AbstractServiceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Formatter\DataExportFormatterInterface
-     */
     public function createDataExportCsvFormatter(): DataExportFormatterInterface
     {
         return new DataExportCsvFormatter($this->getCsvFormatter());
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Resolver\DataExportPathResolverInterface
-     */
     public function createDataExportPathResolver(): DataExportPathResolverInterface
     {
         return new DataExportPathResolver();
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Writer\DataExportWriterInterface
-     */
     public function createDataExportLocalWriter(): DataExportWriterInterface
     {
         return new DataExportLocalWriter(
@@ -120,17 +93,11 @@ class DataExportServiceFactory extends AbstractServiceFactory
         );
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Writer\FormattedDataExportWriterInterface
-     */
     public function createOutputStreamFormattedDataExportWriter(): FormattedDataExportWriterInterface
     {
         return new OutputStreamFormattedDataExportWriter();
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Dependency\Service\DataExportToUtilDataReaderServiceInterface
-     */
     public function getUtilDataReaderService(): DataExportToUtilDataReaderServiceInterface
     {
         return $this->getProvidedDependency(DataExportDependencyProvider::SERVICE_UTIL_DATA_READER);
@@ -152,9 +119,6 @@ class DataExportServiceFactory extends AbstractServiceFactory
         return $this->getProvidedDependency(DataExportDependencyProvider::DATA_EXPORT_CONNECTION_PLUGINS);
     }
 
-    /**
-     * @return \Spryker\Service\DataExport\Dependency\External\DataExportToCsvFormatterInterface
-     */
     public function getCsvFormatter(): DataExportToCsvFormatterInterface
     {
         return $this->getProvidedDependency(DataExportDependencyProvider::CSV_FORMATTER);

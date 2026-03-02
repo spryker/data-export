@@ -32,12 +32,6 @@ class DataExportExecutorTest extends Unit
      */
     protected DataExportBusinessTester $tester;
 
-    /**
-     * @param array $testData
-     * @param array $fields
-     *
-     * @return string
-     */
     public function exportDataFromExecutorAndReturnFileContants(array $testData, array $fields = ['id', 'name']): string
     {
         $dataExportExecutor = $this->tester->getDataExportExecutor(
@@ -57,9 +51,6 @@ class DataExportExecutorTest extends Unit
         return $contents;
     }
 
-    /**
-     * @return void
-     */
     public function testExportCreatesFileWithCorrectContents(): void
     {
         // Arrange
@@ -90,9 +81,6 @@ class DataExportExecutorTest extends Unit
         $dataExportExecutor->exportDataEntities($this->tester->getDataExportConfigurationsTransferWithoutFields());
     }
 
-    /**
-     * @return void
-     */
     public function testExportCreatesEmptyFileIfNoDataIsFound(): void
     {
         // Arrange
@@ -105,9 +93,6 @@ class DataExportExecutorTest extends Unit
         $this->assertEquals($contents, "id,name\n");
     }
 
-    /**
-     * @return void
-     */
     public function testExportMapsDataCorrectly(): void
     {
         // Arrange
@@ -125,9 +110,6 @@ class DataExportExecutorTest extends Unit
         $this->assertEquals("theId,theName\n1,test1\n2,test2\n", $contents);
     }
 
-    /**
-     * @return void
-     */
     public function testExportMapsNestedDataCorrectly(): void
     {
         // Arrange
@@ -154,11 +136,6 @@ class DataExportExecutorTest extends Unit
         $this->assertEquals("theId.*.theNesteId,theName.*.theNestedName\n1,test1\n", $contents);
     }
 
-    /**
-     * @param array $testData
-     *
-     * @return \Spryker\Zed\DataExportExtension\Dependency\Plugin\DataEntityReaderPluginInterface
-     */
     public function mockDataEntityReaderPlugin(array $testData): DataEntityReaderPluginInterface
     {
         $dataEntityReaderPluginMock = $this->createMock(DataEntityReaderPluginInterface::class);
@@ -170,11 +147,6 @@ class DataExportExecutorTest extends Unit
         return $dataEntityReaderPluginMock;
     }
 
-    /**
-     * @param array $testData
-     *
-     * @return \Spryker\Zed\DataExport\Business\DataEntityPluginProvider\DataExportPluginProvider
-     */
     public function mockDataExportPluginProvider(array $testData): DataExportPluginProvider
     {
         $dataExportPluginProviderMock = $this->createMock(

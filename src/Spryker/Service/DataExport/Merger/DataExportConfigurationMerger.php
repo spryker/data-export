@@ -11,12 +11,6 @@ use Generated\Shared\Transfer\DataExportConfigurationTransfer;
 
 class DataExportConfigurationMerger implements DataExportConfigurationMergerInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer|null $primaryDataExportConfigurationTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer|null $secondaryDataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportConfigurationTransfer
-     */
     public function mergeDataExportConfigurationTransfers(
         ?DataExportConfigurationTransfer $primaryDataExportConfigurationTransfer,
         ?DataExportConfigurationTransfer $secondaryDataExportConfigurationTransfer
@@ -35,12 +29,6 @@ class DataExportConfigurationMerger implements DataExportConfigurationMergerInte
         return $secondaryDataExportConfigurationTransfer->fromArray($primaryDataExportConfigurationTransfer->modifiedToArray());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $primaryDataExportConfigurationTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $secondaryDataExportConfigurationTransfer
-     *
-     * @return array
-     */
     protected function mergeDataExportConfigurationHooks(
         DataExportConfigurationTransfer $primaryDataExportConfigurationTransfer,
         DataExportConfigurationTransfer $secondaryDataExportConfigurationTransfer
@@ -51,12 +39,6 @@ class DataExportConfigurationMerger implements DataExportConfigurationMergerInte
         );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $primaryDataExportConfigurationTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $secondaryDataExportConfigurationTransfer
-     *
-     * @return array
-     */
     protected function mergeDataExportConfigurationFilterCriteria(
         DataExportConfigurationTransfer $primaryDataExportConfigurationTransfer,
         DataExportConfigurationTransfer $secondaryDataExportConfigurationTransfer

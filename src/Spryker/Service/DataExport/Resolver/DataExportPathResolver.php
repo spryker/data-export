@@ -11,12 +11,6 @@ use Generated\Shared\Transfer\DataExportConfigurationTransfer;
 
 class DataExportPathResolver implements DataExportPathResolverInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     * @param string $exportRootDir
-     *
-     * @return string
-     */
     public function resolvePath(DataExportConfigurationTransfer $dataExportConfigurationTransfer, string $exportRootDir): string
     {
         $fullPath = $exportRootDir . DIRECTORY_SEPARATOR . $dataExportConfigurationTransfer->getDestination();

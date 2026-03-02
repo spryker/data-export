@@ -40,13 +40,6 @@ class OutputStreamFormattedDataExportWriter implements FormattedDataExportWriter
      */
     protected const ERROR_KEY_MESSAGE = 'message';
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportFormatResponseTransfer $dataExportFormatResponseTransfer
-     * @param \Generated\Shared\Transfer\DataExportBatchTransfer $dataExportBatchTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportWriteResponseTransfer
-     */
     public function write(
         DataExportFormatResponseTransfer $dataExportFormatResponseTransfer,
         DataExportBatchTransfer $dataExportBatchTransfer,
@@ -82,12 +75,6 @@ class OutputStreamFormattedDataExportWriter implements FormattedDataExportWriter
         return $dataExportWriteResponseTransfer;
     }
 
-    /**
-     * @param string $messageTemplate
-     * @param string $destination
-     *
-     * @return string
-     */
     protected function getErrorMessage(string $messageTemplate, string $destination): string
     {
         $error = error_get_last();

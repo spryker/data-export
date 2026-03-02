@@ -12,12 +12,6 @@ use Generated\Shared\Transfer\DataExportConfigurationTransfer;
 
 interface DataExportConfigurationResolverInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportActionConfigurationTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationsTransfer $additionalDataExportConfigurationsTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportConfigurationTransfer
-     */
     public function resolveDataExportActionConfiguration(
         DataExportConfigurationTransfer $dataExportActionConfigurationTransfer,
         DataExportConfigurationsTransfer $additionalDataExportConfigurationsTransfer

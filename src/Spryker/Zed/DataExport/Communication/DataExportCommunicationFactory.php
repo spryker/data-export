@@ -17,9 +17,6 @@ use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
  */
 class DataExportCommunicationFactory extends AbstractCommunicationFactory
 {
-    /**
-     * @return \Spryker\Service\DataExport\DataExportServiceInterface
-     */
     public function getDataExportService(): DataExportServiceInterface
     {
         return $this->getProvidedDependency(DataExportDependencyProvider::SERVICE_DATA_EXPORT);

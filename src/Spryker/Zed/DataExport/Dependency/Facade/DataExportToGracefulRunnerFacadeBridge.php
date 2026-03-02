@@ -24,12 +24,6 @@ class DataExportToGracefulRunnerFacadeBridge implements DataExportToGracefulRunn
         $this->gracefulRunnerFacade = $gracefulRunnerFacade;
     }
 
-    /**
-     * @param \Generator $generator
-     * @param string|null $throwableClassName
-     *
-     * @return int
-     */
     public function run(Generator $generator, ?string $throwableClassName = null): int
     {
         return $this->gracefulRunnerFacade->run($generator, $throwableClassName);

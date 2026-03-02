@@ -21,19 +21,11 @@ class DataExportToLeagueCsvWriterAdapter implements DataExportToCsvFormatterInte
         $this->writer = Writer::createFromString();
     }
 
-    /**
-     * @param array $record
-     *
-     * @return int
-     */
     public function addRecord(array $record): int
     {
         return $this->writer->insertOne($record);
     }
 
-    /**
-     * @return string
-     */
     public function getFormattedRecords(): string
     {
         return $this->writer->getContent();

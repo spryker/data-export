@@ -39,11 +39,6 @@ class DataExportDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const CSV_FORMATTER = 'CSV_FORMATTER';
 
-    /**
-     * @param \Spryker\Service\Kernel\Container $container
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
     public function provideServiceDependencies(Container $container): Container
     {
         $container = parent::provideServiceDependencies($container);
@@ -55,11 +50,6 @@ class DataExportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Kernel\Container $container
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
     protected function addUtilDataReaderService(Container $container): Container
     {
         $container->set(static::SERVICE_UTIL_DATA_READER, function (Container $container): DataExportToUtilDataReaderServiceInterface {
@@ -71,11 +61,6 @@ class DataExportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Kernel\Container $container
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
     protected function addDataExportFormatterPlugins(Container $container): Container
     {
         $container->set(static::DATA_EXPORT_FORMATTER_PLUGINS, function (): array {
@@ -85,11 +70,6 @@ class DataExportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Kernel\Container $container
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
     protected function addDataExportConnectionPlugins(Container $container): Container
     {
         $container->set(static::DATA_EXPORT_CONNECTION_PLUGINS, function (): array {
@@ -99,11 +79,6 @@ class DataExportDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Kernel\Container $container
-     *
-     * @return \Spryker\Service\Kernel\Container
-     */
     protected function addCsvFormatter(Container $container): Container
     {
         $container->set(static::CSV_FORMATTER, $container->factory(function (): DataExportToCsvFormatterInterface {

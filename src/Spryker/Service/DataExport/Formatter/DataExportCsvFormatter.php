@@ -30,20 +30,11 @@ class DataExportCsvFormatter implements DataExportFormatterInterface
      */
     protected $csvFormatter;
 
-    /**
-     * @param \Spryker\Service\DataExport\Dependency\External\DataExportToCsvFormatterInterface $csvFormatter
-     */
     public function __construct(DataExportToCsvFormatterInterface $csvFormatter)
     {
         $this->csvFormatter = $csvFormatter;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportBatchTransfer $dataExportBatchTransfer
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataExportFormatResponseTransfer
-     */
     public function formatBatch(
         DataExportBatchTransfer $dataExportBatchTransfer,
         DataExportConfigurationTransfer $dataExportConfigurationTransfer
@@ -66,19 +57,11 @@ class DataExportCsvFormatter implements DataExportFormatterInterface
             ->setDataFormatted($this->csvFormatter->getFormattedRecords());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataExportConfigurationTransfer $dataExportConfigurationTransfer
-     *
-     * @return string|null
-     */
     public function getFormatExtension(DataExportConfigurationTransfer $dataExportConfigurationTransfer): ?string
     {
         return static::EXTENSION_CSV;
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\MessageTransfer
-     */
     protected function createInvalidDataSetResponseMessage(): MessageTransfer
     {
         return (new MessageTransfer())->setValue(static::MESSAGE_INVALID_DATA_SET);

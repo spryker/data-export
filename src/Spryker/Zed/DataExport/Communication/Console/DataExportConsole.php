@@ -47,9 +47,6 @@ class DataExportConsole extends Console
      */
     public const OPTION_THROW_EXCEPTION_SHORT = 't';
 
-    /**
-     * @return void
-     */
     protected function configure(): void
     {
         $this->setName(static::COMMAND_NAME)
@@ -60,12 +57,6 @@ class DataExportConsole extends Console
         parent::configure();
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if (!$this->isConfigOptionProvided($input)) {
@@ -90,11 +81,6 @@ class DataExportConsole extends Console
         return $this->printDataExportReport($output, $dataExportReportTransfers);
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     *
-     * @return string
-     */
     protected function getConfigOption(InputInterface $input): string
     {
         /** @var string $configOption */
@@ -129,11 +115,6 @@ class DataExportConsole extends Console
         return $isSuccessful ? static::CODE_SUCCESS : static::CODE_ERROR;
     }
 
-    /**
-     * @param \Symfony\Component\Console\Input\InputInterface $input
-     *
-     * @return bool
-     */
     protected function isConfigOptionProvided(InputInterface $input): bool
     {
         return $input->hasParameterOption([

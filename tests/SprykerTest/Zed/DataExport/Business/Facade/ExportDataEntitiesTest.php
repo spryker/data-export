@@ -31,9 +31,6 @@ class ExportDataEntitiesTest extends Unit
      */
     protected DataExportBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     public function testThrowsAnExceptionWhenThrowExceptionOptionIsProvided(): void
     {
         // Arrange
@@ -48,9 +45,6 @@ class ExportDataEntitiesTest extends Unit
         $this->tester->getFacade()->exportDataEntities($dataExportConfigurationsTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testDoesNotThrowAnExceptionWhenThrowExceptionOptionIsNotProvided(): void
     {
         // Arrange

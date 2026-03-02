@@ -40,9 +40,6 @@ class DataExportCsvFormatterTest extends Unit
         ['column_1' => 'data_2_1', 'column_2' => 'data_2_2'],
     ];
 
-    /**
-     * @return void
-     */
     public function testFormatBatchWillFormatCsvDataArrayToCsvString(): void
     {
         //Arrange
@@ -68,9 +65,6 @@ class DataExportCsvFormatterTest extends Unit
         );
     }
 
-    /**
-     * @return void
-     */
     public function testFormatBatchWillReturnNotSuccessfulResponseInCaseOfInvalidData(): void
     {
         //Arrange
@@ -91,9 +85,6 @@ class DataExportCsvFormatterTest extends Unit
         $this->assertFalse($dataExportFormatResponseTransfer->getIsSuccessful());
     }
 
-    /**
-     * @return void
-     */
     public function testGetFormatExtensionWillReturnExtensionCsv(): void
     {
         //Arrange
@@ -119,11 +110,6 @@ class DataExportCsvFormatterTest extends Unit
         return $csvFormatterMock;
     }
 
-    /**
-     * @param array $csvData
-     *
-     * @return string
-     */
     protected function getExpectedCsvString(array $csvData): string
     {
         $formattedRows = [];
@@ -134,9 +120,6 @@ class DataExportCsvFormatterTest extends Unit
         return implode(PHP_EOL, $formattedRows);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\DataExportConfigurationTransfer
-     */
     protected function createDataExportConfigurationTransfer(): DataExportConfigurationTransfer
     {
         $dataExportFormatConfigurationTransfer = (new DataExportFormatConfigurationTransfer())->setType(static::FORMAT_TYPE_CSV);
