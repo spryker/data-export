@@ -173,10 +173,11 @@ class DataExportExecutor
         $dataExportConfigurationTransfer = $this->expandDataExportConfigurationWithDataEntityPlugins($dataExportConfigurationTransfer);
 
         if ($this->dataExportPluginProvider->hasDataEntityPlugin($dataEntityName, DataEntityExporterPluginInterface::class)) {
+            $dataEntityExporterPlugin = $this->dataExportPluginProvider
+                ->getDataEntityPluginForInterface($dataEntityName, DataEntityExporterPluginInterface::class);
+
             /** @phpstan-ignore-next-line method.notFound */
-            return $this->dataExportPluginProvider
-                ->getDataEntityPluginForInterface($dataEntityName, DataEntityExporterPluginInterface::class)
-                ->export($dataExportConfigurationTransfer);
+            return $dataEntityExporterPlugin->export($dataExportConfigurationTransfer);
         }
 
         return $this->dataExportGeneratorExporter
@@ -210,10 +211,11 @@ class DataExportExecutor
         }
 
         if ($this->dataExportPluginProvider->hasDataEntityPlugin($dataEntityName, DataEntityGeneratorPluginInterface::class)) {
+            $dataEntityGeneratorPlugin = $this->dataExportPluginProvider
+                ->getDataEntityPluginForInterface($dataEntityName, DataEntityGeneratorPluginInterface::class);
+
             /** @phpstan-ignore-next-line method.notFound */
-            return $this->dataExportPluginProvider
-                ->getDataEntityPluginForInterface($dataEntityName, DataEntityGeneratorPluginInterface::class)
-                ->getBatchGenerator($dataExportConfigurationTransfer);
+            return $dataEntityGeneratorPlugin->getBatchGenerator($dataExportConfigurationTransfer);
         }
 
         $offset = 0;
