@@ -231,7 +231,8 @@ class DataExportExecutor
             yield $dataExportBatchTransfer;
 
             $offset += count($dataExportBatchTransfer->getData());
-        } while (count($dataExportBatchTransfer->getData()) === $limit);
+            $hasNextBatch = count($dataExportBatchTransfer->getData()) === $limit;
+        } while ($hasNextBatch);
     }
 
     /**

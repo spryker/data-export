@@ -44,7 +44,7 @@ class DataExportPropertyReader implements DataExportPropertyReaderInterface
      */
     public static function getByKeys(mixed $value, array $keys, mixed $default, array $rootValue): mixed
     {
-        while (count($keys)) {
+        while ($keys !== []) {
             $key = array_shift($keys);
 
             if (!is_array($value)) {
